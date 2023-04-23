@@ -27,6 +27,9 @@ for i in database:
     DashBoard[i] ={}
     score = {}
     for profile in database[username]:
+        if database[username][profile]=="":
+            DashBoard[username][profile] = 0
+            continue
         req = requests.get(database[username][profile])
         soup = BeautifulSoup(req.content, 'html.parser')
         problems = {}
@@ -50,6 +53,8 @@ for i in database:
 
         print(username,problems,calculate_score(problems,profile))
         DashBoard[username][profile] = calculate_score(problems,profile)
+
+
 print(time.time()-a)
 print(DashBoard)
 data = DashBoard.values()
