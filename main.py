@@ -26,6 +26,7 @@ for i in database:
     username = i
     DashBoard[i] ={}
     score = {}
+    total_score = 0
     for profile in database[username]:
         if database[username][profile]=="":
             DashBoard[username][profile] = 0
@@ -51,8 +52,11 @@ for i in database:
                 temp = i.text
                 problems[temp.split('(')[0].lower()[:-1]] = temp.split('(')[1].split(')')[0]
 
-        print(username,problems,calculate_score(problems,profile))
-        DashBoard[username][profile] = calculate_score(problems,profile)
+        temp = calculate_score(problems,profile)
+        print(username,problems,temp)
+        DashBoard[username][profile] = temp
+        total_score += temp
+    DashBoard[username]['Total_Score'] = total_score
 
 
 print(time.time()-a)
