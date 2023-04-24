@@ -53,14 +53,17 @@ for i in database:
                 problems[temp.split('(')[0].lower()[:-1]] = temp.split('(')[1].split(')')[0]
 
         temp = calculate_score(problems,profile)
-        print(username,problems,temp)
+        #print(username,problems,temp)
         DashBoard[username][profile] = temp
         total_score += temp
     DashBoard[username]['Total_Score'] = total_score
 
-
-print(time.time()-a)
-print(DashBoard)
+#print(time.time()-a)
+#print(DashBoard)
 data = DashBoard.values()
 df = pd.DataFrame(data, index=DashBoard.keys())
+#print(df.head())
+
+df.sort_values(by = 'Total_Score',inplace = True,ascending=False)
+#print(df.head())
 df.to_csv('smartinterviewsscore.csv')
